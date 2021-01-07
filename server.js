@@ -2,12 +2,13 @@ const express = require("express");
 const connectDB = require("./config/db");
 
 const app = express();
+app.get("/", (req, res) => res.json({ message: "Hello" }));
 
 //Connect DB
 connectDB();
 
-app.get("/", (req, res) => res.json({ message: "Hello" }));
-
+//Init Middleware
+app.use(express.json({ extended: false }));
 //Routes
 app.use("/api/users", require("./routes/users"));
 app.use("/api/contacts", require("./routes/contacts"));
